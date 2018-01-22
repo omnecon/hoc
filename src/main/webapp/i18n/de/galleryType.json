@@ -1,0 +1,10 @@
+{
+    "hochzeitclick11App": {
+        "GalleryType" : {
+            "null": "",
+            "PORTFOLIO": "PORTFOLIO",
+            "LOCATION": "LOCATION",
+            "COMMUNITY": "COMMUNITY"
+        }
+    }
+}

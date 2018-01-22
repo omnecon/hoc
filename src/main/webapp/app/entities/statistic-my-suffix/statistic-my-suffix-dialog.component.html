@@ -1,0 +1,62 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myStatisticLabel" jhiTranslate="hochzeitclick11App.statistic.home.createOrEditLabel">Create or edit a Statistic</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!statistic.id">
+            <label for="id" jhiTranslate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="statistic.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="hochzeitclick11App.statistic.noOfFag" for="field_noOfFag">No Of Fag</label>
+            <input type="number" class="form-control" name="noOfFag" id="field_noOfFag"
+                [(ngModel)]="statistic.noOfFag" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="hochzeitclick11App.statistic.noOfGalleries" for="field_noOfGalleries">No Of Galleries</label>
+            <input type="number" class="form-control" name="noOfGalleries" id="field_noOfGalleries"
+                [(ngModel)]="statistic.noOfGalleries" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="hochzeitclick11App.statistic.noOfInquiries" for="field_noOfInquiries">No Of Inquiries</label>
+            <input type="number" class="form-control" name="noOfInquiries" id="field_noOfInquiries"
+                [(ngModel)]="statistic.noOfInquiries" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="hochzeitclick11App.statistic.noOfLinkedProvider" for="field_noOfLinkedProvider">No Of Linked Provider</label>
+            <input type="number" class="form-control" name="noOfLinkedProvider" id="field_noOfLinkedProvider"
+                [(ngModel)]="statistic.noOfLinkedProvider" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="hochzeitclick11App.statistic.noOfPortfolioImg" for="field_noOfPortfolioImg">No Of Portfolio Img</label>
+            <input type="number" class="form-control" name="noOfPortfolioImg" id="field_noOfPortfolioImg"
+                [(ngModel)]="statistic.noOfPortfolioImg" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="hochzeitclick11App.statistic.viewsTotalWP" for="field_viewsTotalWP">Views Total WP</label>
+            <input type="number" class="form-control" name="viewsTotalWP" id="field_viewsTotalWP"
+                [(ngModel)]="statistic.viewsTotalWP" />
+        </div>
+
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="hochzeitclick11App.statistic.profile" for="field_profile">Profile</label>
+            <select class="form-control" id="field_profile" name="profile" [(ngModel)]="statistic.profile">
+                <option [ngValue]="null"></option>
+                <option [ngValue]="profileOption.id === statistic.profile?.id ? statistic.profile : profileOption" *ngFor="let profileOption of profiles; trackBy: trackProfileById">{{profileOption.title}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

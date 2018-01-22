@@ -1,0 +1,22 @@
+{
+    "hochzeitclick11App": {
+        "dataImport" : {
+            "home": {
+                "title": "Data Imports",
+                "createLabel": "Create a new Data Import",
+                "createOrEditLabel": "Create or edit a Data Import",
+                "search": "Search for Data Import"
+            },
+            "created": "A new Data Import is created with identifier {{ param }}",
+            "updated": "A Data Import is updated with identifier {{ param }}",
+            "deleted": "A Data Import is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Data Import {{ id }}?"
+            },
+            "detail": {
+                "title": "Data Import"
+            },
+            "type": "Type"
+        }
+    }
+}

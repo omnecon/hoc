@@ -1,0 +1,23 @@
+{
+    "hochzeitclick11App": {
+        "feature" : {
+            "home": {
+                "title": "Features",
+                "createLabel": "Feature erstellen",
+                "createOrEditLabel": "Feature erstellen oder bearbeiten",
+                "search": "Suche nach Feature"
+            },
+            "created": "Feature erstellt mit ID {{ param }}",
+            "updated": "Feature aktualisiert mit ID {{ param }}",
+            "deleted": "Feature gelöscht mit ID {{ param }}",
+            "delete": {
+                "question": "Soll Feature {{ id }} wirklich dauerhaft gelöscht werden?"
+            },
+            "detail": {
+                "title": "Feature"
+            },
+            "name": "Name",
+            "profiles": "Profiles"
+        }
+    }
+}

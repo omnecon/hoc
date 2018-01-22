@@ -1,0 +1,77 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myInquiryLabel" jhiTranslate="hochzeitclick11App.inquiry.home.createOrEditLabel">Create or edit a Inquiry</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!inquiry.id">
+            <label for="id" jhiTranslate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="inquiry.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="hochzeitclick11App.inquiry.createdDate" for="field_createdDate">Created Date</label>
+            <div class="d-flex">
+                <input id="field_createdDate" type="datetime-local" class="form-control" name="createdDate" [(ngModel)]="inquiry.createdDate"
+                />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="hochzeitclick11App.inquiry.email" for="field_email">Email</label>
+            <input type="text" class="form-control" name="email" id="field_email"
+                [(ngModel)]="inquiry.email" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="hochzeitclick11App.inquiry.firstName" for="field_firstName">First Name</label>
+            <input type="text" class="form-control" name="firstName" id="field_firstName"
+                [(ngModel)]="inquiry.firstName" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="hochzeitclick11App.inquiry.lastName" for="field_lastName">Last Name</label>
+            <input type="text" class="form-control" name="lastName" id="field_lastName"
+                [(ngModel)]="inquiry.lastName" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="hochzeitclick11App.inquiry.phoneNumber" for="field_phoneNumber">Phone Number</label>
+            <input type="text" class="form-control" name="phoneNumber" id="field_phoneNumber"
+                [(ngModel)]="inquiry.phoneNumber" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="hochzeitclick11App.inquiry.country" for="field_country">Country</label>
+            <input type="text" class="form-control" name="country" id="field_country"
+                [(ngModel)]="inquiry.country" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="hochzeitclick11App.inquiry.region" for="field_region">Region</label>
+            <input type="text" class="form-control" name="region" id="field_region"
+                [(ngModel)]="inquiry.region" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="hochzeitclick11App.inquiry.provice" for="field_provice">Provice</label>
+            <input type="text" class="form-control" name="provice" id="field_provice"
+                [(ngModel)]="inquiry.provice" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="hochzeitclick11App.inquiry.city" for="field_city">City</label>
+            <input type="text" class="form-control" name="city" id="field_city"
+                [(ngModel)]="inquiry.city" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="hochzeitclick11App.inquiry.postalCode" for="field_postalCode">Postal Code</label>
+            <input type="text" class="form-control" name="postalCode" id="field_postalCode"
+                [(ngModel)]="inquiry.postalCode" />
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

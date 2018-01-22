@@ -1,0 +1,176 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myProfileLabel" jhiTranslate="hochzeitclick11App.profile.home.createOrEditLabel">Create or edit a Profile</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!profile.id">
+            <label for="id" jhiTranslate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="profile.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="hochzeitclick11App.profile.createdDate" for="field_createdDate">Created Date</label>
+            <div class="d-flex">
+                <input id="field_createdDate" type="datetime-local" class="form-control" name="createdDate" [(ngModel)]="profile.createdDate"
+                />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="hochzeitclick11App.profile.lastUpdatedDate" for="field_lastUpdatedDate">Last Updated Date</label>
+            <div class="d-flex">
+                <input id="field_lastUpdatedDate" type="datetime-local" class="form-control" name="lastUpdatedDate" [(ngModel)]="profile.lastUpdatedDate"
+                />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="hochzeitclick11App.profile.published" for="field_published">Published</label>
+            <input type="checkbox" class="form-control" name="published" id="field_published"
+                [(ngModel)]="profile.published" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="hochzeitclick11App.profile.url" for="field_url">Url</label>
+            <input type="text" class="form-control" name="url" id="field_url"
+                [(ngModel)]="profile.url" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="hochzeitclick11App.profile.branch" for="field_branch">Branch</label>
+            <input type="text" class="form-control" name="branch" id="field_branch"
+                [(ngModel)]="profile.branch" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="hochzeitclick11App.profile.title" for="field_title">Title</label>
+            <input type="text" class="form-control" name="title" id="field_title"
+                [(ngModel)]="profile.title" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="hochzeitclick11App.profile.email" for="field_email">Email</label>
+            <input type="text" class="form-control" name="email" id="field_email"
+                [(ngModel)]="profile.email" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="hochzeitclick11App.profile.firstName" for="field_firstName">First Name</label>
+            <input type="text" class="form-control" name="firstName" id="field_firstName"
+                [(ngModel)]="profile.firstName" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="hochzeitclick11App.profile.lastName" for="field_lastName">Last Name</label>
+            <input type="text" class="form-control" name="lastName" id="field_lastName"
+                [(ngModel)]="profile.lastName" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="hochzeitclick11App.profile.phoneNumber" for="field_phoneNumber">Phone Number</label>
+            <input type="text" class="form-control" name="phoneNumber" id="field_phoneNumber"
+                [(ngModel)]="profile.phoneNumber" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="hochzeitclick11App.profile.score" for="field_score">Score</label>
+            <input type="number" class="form-control" name="score" id="field_score"
+                [(ngModel)]="profile.score" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="hochzeitclick11App.profile.proPackage" for="field_proPackage">Pro Package</label>
+            <select class="form-control" name="proPackage" [(ngModel)]="profile.proPackage" id="field_proPackage" >
+                <option value="FREE">{{'hochzeitclick11App.ProPackage.FREE' | translate}}</option>
+                <option value="PRO_STANDARD">{{'hochzeitclick11App.ProPackage.PRO_STANDARD' | translate}}</option>
+                <option value="PRO_ADVANCED">{{'hochzeitclick11App.ProPackage.PRO_ADVANCED' | translate}}</option>
+                <option value="VIP">{{'hochzeitclick11App.ProPackage.VIP' | translate}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="hochzeitclick11App.profile.lng" for="field_lng">Lng</label>
+            <input type="number" class="form-control" name="lng" id="field_lng"
+                [(ngModel)]="profile.lng" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="hochzeitclick11App.profile.lat" for="field_lat">Lat</label>
+            <input type="number" class="form-control" name="lat" id="field_lat"
+                [(ngModel)]="profile.lat" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="hochzeitclick11App.profile.country" for="field_country">Country</label>
+            <input type="text" class="form-control" name="country" id="field_country"
+                [(ngModel)]="profile.country" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="hochzeitclick11App.profile.city" for="field_city">City</label>
+            <input type="text" class="form-control" name="city" id="field_city"
+                [(ngModel)]="profile.city" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="hochzeitclick11App.profile.state" for="field_state">State</label>
+            <input type="text" class="form-control" name="state" id="field_state"
+                [(ngModel)]="profile.state" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="hochzeitclick11App.profile.street" for="field_street">Street</label>
+            <input type="text" class="form-control" name="street" id="field_street"
+                [(ngModel)]="profile.street" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="hochzeitclick11App.profile.postCode" for="field_postCode">Post Code</label>
+            <input type="text" class="form-control" name="postCode" id="field_postCode"
+                [(ngModel)]="profile.postCode" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="hochzeitclick11App.profile.gender" for="field_gender">Gender</label>
+            <select class="form-control" name="gender" [(ngModel)]="profile.gender" id="field_gender" >
+                <option value="F">{{'hochzeitclick11App.Gender.F' | translate}}</option>
+                <option value="M">{{'hochzeitclick11App.Gender.M' | translate}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="hochzeitclick11App.profile.agbCheck" for="field_agbCheck">Agb Check</label>
+            <input type="checkbox" class="form-control" name="agbCheck" id="field_agbCheck"
+                [(ngModel)]="profile.agbCheck" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="hochzeitclick11App.profile.status" for="field_status">Status</label>
+            <input type="text" class="form-control" name="status" id="field_status"
+                [(ngModel)]="profile.status" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="hochzeitclick11App.profile.locType" for="field_locType">Loc Type</label>
+            <input type="text" class="form-control" name="locType" id="field_locType"
+                [(ngModel)]="profile.locType" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="hochzeitclick11App.profile.locGeo" for="field_locGeo">Loc Geo</label>
+            <input type="text" class="form-control" name="locGeo" id="field_locGeo"
+                [(ngModel)]="profile.locGeo" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="hochzeitclick11App.profile.locCapacity" for="field_locCapacity">Loc Capacity</label>
+            <input type="text" class="form-control" name="locCapacity" id="field_locCapacity"
+                [(ngModel)]="profile.locCapacity" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="hochzeitclick11App.profile.spAvailableRegion" for="field_spAvailableRegion">Sp Available Region</label>
+            <input type="text" class="form-control" name="spAvailableRegion" id="field_spAvailableRegion"
+                [(ngModel)]="profile.spAvailableRegion" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="hochzeitclick11App.profile.featureStr" for="field_featureStr">Feature Str</label>
+            <input type="text" class="form-control" name="featureStr" id="field_featureStr"
+                [(ngModel)]="profile.featureStr" />
+        </div>
+
+        <div class="form-group">
+            <label jhiTranslate="hochzeitclick11App.profile.features" for="field_features">Features</label>
+            <select class="form-control" id="field_features" multiple name="features" [(ngModel)]="profile.features">
+                <option [ngValue]="getSelected(profile.features, featureOption)" *ngFor="let featureOption of features; trackBy: trackFeatureById">{{featureOption.name}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

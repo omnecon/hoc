@@ -1,0 +1,47 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "profile",
+            "otherEntityName": "profile",
+            "otherEntityField": "title",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "statistic"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "noOfFag",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "noOfGalleries",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "noOfInquiries",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "noOfLinkedProvider",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "noOfPortfolioImg",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "viewsTotalWP",
+            "fieldType": "Integer"
+        }
+    ],
+    "changelogDate": "20180121210215",
+    "entityTableName": "statistic",
+    "dto": "no",
+    "pagination": "pagination",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": true,
+    "searchEngine": "elasticsearch",
+    "angularJSSuffix": "mySuffix"
+}

@@ -1,0 +1,11 @@
+{
+    "hochzeitclick11App": {
+        "ProPackage" : {
+            "null": "",
+            "FREE": "FREE",
+            "PRO_STANDARD": "PRO_STANDARD",
+            "PRO_ADVANCED": "PRO_ADVANCED",
+            "VIP": "VIP"
+        }
+    }
+}

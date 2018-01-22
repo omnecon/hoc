@@ -1,0 +1,55 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myImageLabel" jhiTranslate="hochzeitclick11App.image.home.createOrEditLabel">Create or edit a Image</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!image.id">
+            <label for="id" jhiTranslate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="image.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="hochzeitclick11App.image.title" for="field_title">Title</label>
+            <input type="text" class="form-control" name="title" id="field_title"
+                [(ngModel)]="image.title" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="hochzeitclick11App.image.alt" for="field_alt">Alt</label>
+            <input type="text" class="form-control" name="alt" id="field_alt"
+                [(ngModel)]="image.alt" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="hochzeitclick11App.image.caption" for="field_caption">Caption</label>
+            <input type="text" class="form-control" name="caption" id="field_caption"
+                [(ngModel)]="image.caption" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="hochzeitclick11App.image.imgOriginal" for="field_imgOriginal">Img Original</label>
+            <input type="text" class="form-control" name="imgOriginal" id="field_imgOriginal"
+                [(ngModel)]="image.imgOriginal" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="hochzeitclick11App.image.imgLarge" for="field_imgLarge">Img Large</label>
+            <input type="text" class="form-control" name="imgLarge" id="field_imgLarge"
+                [(ngModel)]="image.imgLarge" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="hochzeitclick11App.image.imgThumbnail" for="field_imgThumbnail">Img Thumbnail</label>
+            <input type="text" class="form-control" name="imgThumbnail" id="field_imgThumbnail"
+                [(ngModel)]="image.imgThumbnail" />
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

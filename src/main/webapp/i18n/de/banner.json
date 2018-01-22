@@ -1,0 +1,22 @@
+{
+    "hochzeitclick11App": {
+        "banner" : {
+            "home": {
+                "title": "Banners",
+                "createLabel": "Banner erstellen",
+                "createOrEditLabel": "Banner erstellen oder bearbeiten",
+                "search": "Suche nach Banner"
+            },
+            "created": "Banner erstellt mit ID {{ param }}",
+            "updated": "Banner aktualisiert mit ID {{ param }}",
+            "deleted": "Banner gelöscht mit ID {{ param }}",
+            "delete": {
+                "question": "Soll Banner {{ id }} wirklich dauerhaft gelöscht werden?"
+            },
+            "detail": {
+                "title": "Banner"
+            },
+            "name": "Name"
+        }
+    }
+}

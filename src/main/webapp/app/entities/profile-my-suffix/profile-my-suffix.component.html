@@ -1,0 +1,131 @@
+<div>
+    <h2>
+        <span jhiTranslate="hochzeitclick11App.profile.home.title">Profiles</span>
+        <button class="btn btn-primary float-right jh-create-entity create-profile-my-suffix" [routerLink]="['/', { outlets: { popup: ['profile-my-suffix-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span class="hidden-sm-down"  jhiTranslate="hochzeitclick11App.profile.home.createLabel">
+            Create new Profile
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+        <div class="col-sm-12">
+            <form name="searchForm" class="form-inline">
+                <div class="input-group w-100 mt-3">
+                    <input type="text" class="form-control" [(ngModel)]="currentSearch" id="currentSearch" name="currentSearch" placeholder="{{ 'hochzeitclick11App.profile.home.search' | translate }}">
+                    <button class="input-group-addon btn btn-info" (click)="search(currentSearch)">
+                        <span class="fa fa-search"></span>
+                    </button>
+                    <button class="input-group-addon btn btn-danger" (click)="clear()" *ngIf="currentSearch">
+                        <span class="fa fa-trash-o"></span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="profiles">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="createdDate"><span jhiTranslate="hochzeitclick11App.profile.createdDate">Created Date</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="lastUpdatedDate"><span jhiTranslate="hochzeitclick11App.profile.lastUpdatedDate">Last Updated Date</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="published"><span jhiTranslate="hochzeitclick11App.profile.published">Published</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="url"><span jhiTranslate="hochzeitclick11App.profile.url">Url</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="branch"><span jhiTranslate="hochzeitclick11App.profile.branch">Branch</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="title"><span jhiTranslate="hochzeitclick11App.profile.title">Title</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="email"><span jhiTranslate="hochzeitclick11App.profile.email">Email</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="firstName"><span jhiTranslate="hochzeitclick11App.profile.firstName">First Name</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="lastName"><span jhiTranslate="hochzeitclick11App.profile.lastName">Last Name</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="phoneNumber"><span jhiTranslate="hochzeitclick11App.profile.phoneNumber">Phone Number</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="score"><span jhiTranslate="hochzeitclick11App.profile.score">Score</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="proPackage"><span jhiTranslate="hochzeitclick11App.profile.proPackage">Pro Package</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="lng"><span jhiTranslate="hochzeitclick11App.profile.lng">Lng</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="lat"><span jhiTranslate="hochzeitclick11App.profile.lat">Lat</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="country"><span jhiTranslate="hochzeitclick11App.profile.country">Country</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="city"><span jhiTranslate="hochzeitclick11App.profile.city">City</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="state"><span jhiTranslate="hochzeitclick11App.profile.state">State</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="street"><span jhiTranslate="hochzeitclick11App.profile.street">Street</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="postCode"><span jhiTranslate="hochzeitclick11App.profile.postCode">Post Code</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="gender"><span jhiTranslate="hochzeitclick11App.profile.gender">Gender</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="agbCheck"><span jhiTranslate="hochzeitclick11App.profile.agbCheck">Agb Check</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="status"><span jhiTranslate="hochzeitclick11App.profile.status">Status</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="locType"><span jhiTranslate="hochzeitclick11App.profile.locType">Loc Type</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="locGeo"><span jhiTranslate="hochzeitclick11App.profile.locGeo">Loc Geo</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="locCapacity"><span jhiTranslate="hochzeitclick11App.profile.locCapacity">Loc Capacity</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="spAvailableRegion"><span jhiTranslate="hochzeitclick11App.profile.spAvailableRegion">Sp Available Region</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="featureStr"><span jhiTranslate="hochzeitclick11App.profile.featureStr">Feature Str</span> <span class="fa fa-sort"></span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let profile of profiles ;trackBy: trackId">
+                <td><a [routerLink]="['../profile-my-suffix', profile.id ]">{{profile.id}}</a></td>
+                <td>{{profile.createdDate | date:'medium'}}</td>
+                <td>{{profile.lastUpdatedDate | date:'medium'}}</td>
+                <td>{{profile.published}}</td>
+                <td>{{profile.url}}</td>
+                <td>{{profile.branch}}</td>
+                <td>{{profile.title}}</td>
+                <td>{{profile.email}}</td>
+                <td>{{profile.firstName}}</td>
+                <td>{{profile.lastName}}</td>
+                <td>{{profile.phoneNumber}}</td>
+                <td>{{profile.score}}</td>
+                <td jhiTranslate="{{'hochzeitclick11App.ProPackage.' + profile.proPackage}}">{{profile.proPackage}}</td>
+                <td>{{profile.lng}}</td>
+                <td>{{profile.lat}}</td>
+                <td>{{profile.country}}</td>
+                <td>{{profile.city}}</td>
+                <td>{{profile.state}}</td>
+                <td>{{profile.street}}</td>
+                <td>{{profile.postCode}}</td>
+                <td jhiTranslate="{{'hochzeitclick11App.Gender.' + profile.gender}}">{{profile.gender}}</td>
+                <td>{{profile.agbCheck}}</td>
+                <td>{{profile.status}}</td>
+                <td>{{profile.locType}}</td>
+                <td>{{profile.locGeo}}</td>
+                <td>{{profile.locCapacity}}</td>
+                <td>{{profile.spAvailableRegion}}</td>
+                <td>{{profile.featureStr}}</td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../profile-my-suffix', profile.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'profile-my-suffix/'+ profile.id + '/edit'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'profile-my-suffix/'+ profile.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div *ngIf="profiles && profiles.length">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>

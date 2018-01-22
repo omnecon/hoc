@@ -1,0 +1,133 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityRelationshipName": "profiles",
+            "relationshipName": "features",
+            "otherEntityName": "feature",
+            "otherEntityField": "name",
+            "ownerSide": true
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "createdDate",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "lastUpdatedDate",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "published",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "url",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "branch",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "title",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "email",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "firstName",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "lastName",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "phoneNumber",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "score",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "proPackage",
+            "fieldType": "ProPackage",
+            "fieldValues": "FREE,PRO_STANDARD,PRO_ADVANCED,VIP"
+        },
+        {
+            "fieldName": "lng",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "lat",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "country",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "city",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "state",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "street",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "postCode",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "gender",
+            "fieldType": "Gender",
+            "fieldValues": "F,M"
+        },
+        {
+            "fieldName": "agbCheck",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "status",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "locType",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "locGeo",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "locCapacity",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "spAvailableRegion",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "featureStr",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20180121210214",
+    "entityTableName": "profile",
+    "dto": "no",
+    "pagination": "pagination",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": true,
+    "searchEngine": "elasticsearch",
+    "angularJSSuffix": "mySuffix"
+}

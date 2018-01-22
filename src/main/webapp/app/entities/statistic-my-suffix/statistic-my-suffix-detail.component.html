@@ -1,0 +1,52 @@
+
+<div *ngIf="statistic">
+    <h2><span jhiTranslate="hochzeitclick11App.statistic.detail.title">Statistic</span> {{statistic.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="hochzeitclick11App.statistic.noOfFag">No Of Fag</span></dt>
+        <dd>
+            <span>{{statistic.noOfFag}}</span>
+        </dd>
+        <dt><span jhiTranslate="hochzeitclick11App.statistic.noOfGalleries">No Of Galleries</span></dt>
+        <dd>
+            <span>{{statistic.noOfGalleries}}</span>
+        </dd>
+        <dt><span jhiTranslate="hochzeitclick11App.statistic.noOfInquiries">No Of Inquiries</span></dt>
+        <dd>
+            <span>{{statistic.noOfInquiries}}</span>
+        </dd>
+        <dt><span jhiTranslate="hochzeitclick11App.statistic.noOfLinkedProvider">No Of Linked Provider</span></dt>
+        <dd>
+            <span>{{statistic.noOfLinkedProvider}}</span>
+        </dd>
+        <dt><span jhiTranslate="hochzeitclick11App.statistic.noOfPortfolioImg">No Of Portfolio Img</span></dt>
+        <dd>
+            <span>{{statistic.noOfPortfolioImg}}</span>
+        </dd>
+        <dt><span jhiTranslate="hochzeitclick11App.statistic.viewsTotalWP">Views Total WP</span></dt>
+        <dd>
+            <span>{{statistic.viewsTotalWP}}</span>
+        </dd>
+        <dt><span jhiTranslate="hochzeitclick11App.statistic.profile">Profile</span></dt>
+        <dd>
+            <div *ngIf="statistic.profile">
+                <a [routerLink]="['/profile-my-suffix', statistic.profile?.id]">{{statistic.profile?.title}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'statistic-my-suffix/'+ statistic.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

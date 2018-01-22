@@ -1,0 +1,136 @@
+
+<div *ngIf="profile">
+    <h2><span jhiTranslate="hochzeitclick11App.profile.detail.title">Profile</span> {{profile.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="hochzeitclick11App.profile.createdDate">Created Date</span></dt>
+        <dd>
+            <span>{{profile.createdDate | date:'medium'}}</span>
+        </dd>
+        <dt><span jhiTranslate="hochzeitclick11App.profile.lastUpdatedDate">Last Updated Date</span></dt>
+        <dd>
+            <span>{{profile.lastUpdatedDate | date:'medium'}}</span>
+        </dd>
+        <dt><span jhiTranslate="hochzeitclick11App.profile.published">Published</span></dt>
+        <dd>
+            <span>{{profile.published}}</span>
+        </dd>
+        <dt><span jhiTranslate="hochzeitclick11App.profile.url">Url</span></dt>
+        <dd>
+            <span>{{profile.url}}</span>
+        </dd>
+        <dt><span jhiTranslate="hochzeitclick11App.profile.branch">Branch</span></dt>
+        <dd>
+            <span>{{profile.branch}}</span>
+        </dd>
+        <dt><span jhiTranslate="hochzeitclick11App.profile.title">Title</span></dt>
+        <dd>
+            <span>{{profile.title}}</span>
+        </dd>
+        <dt><span jhiTranslate="hochzeitclick11App.profile.email">Email</span></dt>
+        <dd>
+            <span>{{profile.email}}</span>
+        </dd>
+        <dt><span jhiTranslate="hochzeitclick11App.profile.firstName">First Name</span></dt>
+        <dd>
+            <span>{{profile.firstName}}</span>
+        </dd>
+        <dt><span jhiTranslate="hochzeitclick11App.profile.lastName">Last Name</span></dt>
+        <dd>
+            <span>{{profile.lastName}}</span>
+        </dd>
+        <dt><span jhiTranslate="hochzeitclick11App.profile.phoneNumber">Phone Number</span></dt>
+        <dd>
+            <span>{{profile.phoneNumber}}</span>
+        </dd>
+        <dt><span jhiTranslate="hochzeitclick11App.profile.score">Score</span></dt>
+        <dd>
+            <span>{{profile.score}}</span>
+        </dd>
+        <dt><span jhiTranslate="hochzeitclick11App.profile.proPackage">Pro Package</span></dt>
+        <dd>
+            <span jhiTranslate="{{'hochzeitclick11App.ProPackage.' + profile.proPackage}}">{{profile.proPackage}}</span>
+        </dd>
+        <dt><span jhiTranslate="hochzeitclick11App.profile.lng">Lng</span></dt>
+        <dd>
+            <span>{{profile.lng}}</span>
+        </dd>
+        <dt><span jhiTranslate="hochzeitclick11App.profile.lat">Lat</span></dt>
+        <dd>
+            <span>{{profile.lat}}</span>
+        </dd>
+        <dt><span jhiTranslate="hochzeitclick11App.profile.country">Country</span></dt>
+        <dd>
+            <span>{{profile.country}}</span>
+        </dd>
+        <dt><span jhiTranslate="hochzeitclick11App.profile.city">City</span></dt>
+        <dd>
+            <span>{{profile.city}}</span>
+        </dd>
+        <dt><span jhiTranslate="hochzeitclick11App.profile.state">State</span></dt>
+        <dd>
+            <span>{{profile.state}}</span>
+        </dd>
+        <dt><span jhiTranslate="hochzeitclick11App.profile.street">Street</span></dt>
+        <dd>
+            <span>{{profile.street}}</span>
+        </dd>
+        <dt><span jhiTranslate="hochzeitclick11App.profile.postCode">Post Code</span></dt>
+        <dd>
+            <span>{{profile.postCode}}</span>
+        </dd>
+        <dt><span jhiTranslate="hochzeitclick11App.profile.gender">Gender</span></dt>
+        <dd>
+            <span jhiTranslate="{{'hochzeitclick11App.Gender.' + profile.gender}}">{{profile.gender}}</span>
+        </dd>
+        <dt><span jhiTranslate="hochzeitclick11App.profile.agbCheck">Agb Check</span></dt>
+        <dd>
+            <span>{{profile.agbCheck}}</span>
+        </dd>
+        <dt><span jhiTranslate="hochzeitclick11App.profile.status">Status</span></dt>
+        <dd>
+            <span>{{profile.status}}</span>
+        </dd>
+        <dt><span jhiTranslate="hochzeitclick11App.profile.locType">Loc Type</span></dt>
+        <dd>
+            <span>{{profile.locType}}</span>
+        </dd>
+        <dt><span jhiTranslate="hochzeitclick11App.profile.locGeo">Loc Geo</span></dt>
+        <dd>
+            <span>{{profile.locGeo}}</span>
+        </dd>
+        <dt><span jhiTranslate="hochzeitclick11App.profile.locCapacity">Loc Capacity</span></dt>
+        <dd>
+            <span>{{profile.locCapacity}}</span>
+        </dd>
+        <dt><span jhiTranslate="hochzeitclick11App.profile.spAvailableRegion">Sp Available Region</span></dt>
+        <dd>
+            <span>{{profile.spAvailableRegion}}</span>
+        </dd>
+        <dt><span jhiTranslate="hochzeitclick11App.profile.featureStr">Feature Str</span></dt>
+        <dd>
+            <span>{{profile.featureStr}}</span>
+        </dd>
+        <dt><span jhiTranslate="hochzeitclick11App.profile.features">Features</span></dt>
+        <dd>
+            <span *ngFor="let features of profile.features; let last = last">
+                <a [routerLink]="['/feature-my-suffix', features?.id ]">{{features.name}}</a>{{last ? '' : ', '}}
+            </span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'profile-my-suffix/'+ profile.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

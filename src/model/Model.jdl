@@ -1,0 +1,103 @@
+entity Profile {
+	createdDate ZonedDateTime
+	lastUpdatedDate ZonedDateTime
+	published Boolean
+	url String
+	branch String
+	title String
+	email String
+	firstName String
+	lastName String
+	phoneNumber String
+	score Long
+	proPackage ProPackage
+	lng Long
+	lat Long
+	country String
+	city String
+	state String
+	street String
+	postCode String
+	gender Gender
+	agbCheck Boolean
+	status String
+	locType String
+	locGeo String
+	locCapacity String
+	spAvailableRegion String
+	featureStr String maxlength(512)
+}
+
+entity Statistic {
+	noOfFag Integer
+    noOfGalleries Integer
+    noOfInquiries Integer
+    noOfLinkedProvider Integer
+    noOfPortfolioImg Integer
+    viewsTotalWP Integer
+    
+}
+
+enum ProPackage {
+    FREE, PRO_STANDARD, PRO_ADVANCED, VIP
+}
+
+enum Gender {
+    F, M
+}
+
+entity Image {
+	title String
+	alt String
+	caption String
+	imgOriginal String
+	imgLarge String
+	imgThumbnail String
+}
+
+entity Gallery {
+	name String
+    type GalleryType
+}
+
+enum GalleryType {
+    PORTFOLIO, LOCATION, COMMUNITY
+}
+
+entity Inquiry {
+	createdDate ZonedDateTime
+	email String
+	firstName String
+	lastName String
+	phoneNumber String
+	country String
+	region String
+	provice String
+	city String
+	postalCode String
+}
+
+entity Banner {
+	name String
+}
+
+
+entity DataImport {
+	type String	
+}
+
+relationship OneToOne {
+	Statistic{profile(title)} to Profile
+}
+
+//dto * with mapstruct
+// Set service options to all except few
+service * with serviceClass
+// Set an angular suffix
+angularSuffix * with mySuffix
+
+filter all except Banner, Feature
+
+paginate * with pagination
+
+search * with elasticsearch

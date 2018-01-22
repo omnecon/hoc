@@ -1,0 +1,28 @@
+{
+    "hochzeitclick11App": {
+        "statistic" : {
+            "home": {
+                "title": "Statistics",
+                "createLabel": "Statistic erstellen",
+                "createOrEditLabel": "Statistic erstellen oder bearbeiten",
+                "search": "Suche nach Statistic"
+            },
+            "created": "Statistic erstellt mit ID {{ param }}",
+            "updated": "Statistic aktualisiert mit ID {{ param }}",
+            "deleted": "Statistic gelöscht mit ID {{ param }}",
+            "delete": {
+                "question": "Soll Statistic {{ id }} wirklich dauerhaft gelöscht werden?"
+            },
+            "detail": {
+                "title": "Statistic"
+            },
+            "noOfFag": "No Of Fag",
+            "noOfGalleries": "No Of Galleries",
+            "noOfInquiries": "No Of Inquiries",
+            "noOfLinkedProvider": "No Of Linked Provider",
+            "noOfPortfolioImg": "No Of Portfolio Img",
+            "viewsTotalWP": "Views Total WP",
+            "profile": "Profile"
+        }
+    }
+}

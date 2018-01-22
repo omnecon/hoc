@@ -1,0 +1,38 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "title",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "alt",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "caption",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "imgOriginal",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "imgLarge",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "imgThumbnail",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20180121210217",
+    "entityTableName": "image",
+    "dto": "no",
+    "pagination": "pagination",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": true,
+    "searchEngine": "elasticsearch",
+    "angularJSSuffix": "mySuffix"
+}

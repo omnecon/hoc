@@ -1,0 +1,31 @@
+{
+    "hochzeitclick11App": {
+        "inquiry" : {
+            "home": {
+                "title": "Inquiries",
+                "createLabel": "Create a new Inquiry",
+                "createOrEditLabel": "Create or edit a Inquiry",
+                "search": "Search for Inquiry"
+            },
+            "created": "A new Inquiry is created with identifier {{ param }}",
+            "updated": "A Inquiry is updated with identifier {{ param }}",
+            "deleted": "A Inquiry is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Inquiry {{ id }}?"
+            },
+            "detail": {
+                "title": "Inquiry"
+            },
+            "createdDate": "Created Date",
+            "email": "Email",
+            "firstName": "First Name",
+            "lastName": "Last Name",
+            "phoneNumber": "Phone Number",
+            "country": "Country",
+            "region": "Region",
+            "provice": "Provice",
+            "city": "City",
+            "postalCode": "Postal Code"
+        }
+    }
+}

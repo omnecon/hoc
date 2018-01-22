@@ -1,0 +1,62 @@
+
+<div *ngIf="inquiry">
+    <h2><span jhiTranslate="hochzeitclick11App.inquiry.detail.title">Inquiry</span> {{inquiry.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="hochzeitclick11App.inquiry.createdDate">Created Date</span></dt>
+        <dd>
+            <span>{{inquiry.createdDate | date:'medium'}}</span>
+        </dd>
+        <dt><span jhiTranslate="hochzeitclick11App.inquiry.email">Email</span></dt>
+        <dd>
+            <span>{{inquiry.email}}</span>
+        </dd>
+        <dt><span jhiTranslate="hochzeitclick11App.inquiry.firstName">First Name</span></dt>
+        <dd>
+            <span>{{inquiry.firstName}}</span>
+        </dd>
+        <dt><span jhiTranslate="hochzeitclick11App.inquiry.lastName">Last Name</span></dt>
+        <dd>
+            <span>{{inquiry.lastName}}</span>
+        </dd>
+        <dt><span jhiTranslate="hochzeitclick11App.inquiry.phoneNumber">Phone Number</span></dt>
+        <dd>
+            <span>{{inquiry.phoneNumber}}</span>
+        </dd>
+        <dt><span jhiTranslate="hochzeitclick11App.inquiry.country">Country</span></dt>
+        <dd>
+            <span>{{inquiry.country}}</span>
+        </dd>
+        <dt><span jhiTranslate="hochzeitclick11App.inquiry.region">Region</span></dt>
+        <dd>
+            <span>{{inquiry.region}}</span>
+        </dd>
+        <dt><span jhiTranslate="hochzeitclick11App.inquiry.provice">Provice</span></dt>
+        <dd>
+            <span>{{inquiry.provice}}</span>
+        </dd>
+        <dt><span jhiTranslate="hochzeitclick11App.inquiry.city">City</span></dt>
+        <dd>
+            <span>{{inquiry.city}}</span>
+        </dd>
+        <dt><span jhiTranslate="hochzeitclick11App.inquiry.postalCode">Postal Code</span></dt>
+        <dd>
+            <span>{{inquiry.postalCode}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'inquiry-my-suffix/'+ inquiry.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>
