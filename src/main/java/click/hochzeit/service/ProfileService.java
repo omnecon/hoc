@@ -65,7 +65,7 @@ public class ProfileService {
     @Transactional(readOnly = true)
     public Profile findOne(Long id) {
         log.debug("Request to get Profile : {}", id);
-        return profileRepository.findOneWithEagerRelationships(id);
+        return profileRepository.findOne(id);
     }
 
     /**

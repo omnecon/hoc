@@ -3,7 +3,6 @@ package click.hochzeit.web.rest;
 import click.hochzeit.Hochzeitclick11App;
 
 import click.hochzeit.domain.Profile;
-import click.hochzeit.domain.Feature;
 import click.hochzeit.repository.ProfileRepository;
 import click.hochzeit.service.ProfileService;
 import click.hochzeit.repository.search.ProfileSearchRepository;
@@ -131,6 +130,15 @@ public class ProfileResourceIntTest {
     private static final String DEFAULT_FEATURE_STR = "AAAAAAAAAA";
     private static final String UPDATED_FEATURE_STR = "BBBBBBBBBB";
 
+    private static final String DEFAULT_IMG_URL = "AAAAAAAAAA";
+    private static final String UPDATED_IMG_URL = "BBBBBBBBBB";
+
+    private static final String DEFAULT_IMG_TITLE = "AAAAAAAAAA";
+    private static final String UPDATED_IMG_TITLE = "BBBBBBBBBB";
+
+    private static final String DEFAULT_IMG_ALT = "AAAAAAAAAA";
+    private static final String UPDATED_IMG_ALT = "BBBBBBBBBB";
+
     @Autowired
     private ProfileRepository profileRepository;
 
@@ -204,7 +212,10 @@ public class ProfileResourceIntTest {
             .locGeo(DEFAULT_LOC_GEO)
             .locCapacity(DEFAULT_LOC_CAPACITY)
             .spAvailableRegion(DEFAULT_SP_AVAILABLE_REGION)
-            .featureStr(DEFAULT_FEATURE_STR);
+            .featureStr(DEFAULT_FEATURE_STR)
+            .imgUrl(DEFAULT_IMG_URL)
+            .imgTitle(DEFAULT_IMG_TITLE)
+            .imgAlt(DEFAULT_IMG_ALT);
         return profile;
     }
 
@@ -256,6 +267,9 @@ public class ProfileResourceIntTest {
         assertThat(testProfile.getLocCapacity()).isEqualTo(DEFAULT_LOC_CAPACITY);
         assertThat(testProfile.getSpAvailableRegion()).isEqualTo(DEFAULT_SP_AVAILABLE_REGION);
         assertThat(testProfile.getFeatureStr()).isEqualTo(DEFAULT_FEATURE_STR);
+        assertThat(testProfile.getImgUrl()).isEqualTo(DEFAULT_IMG_URL);
+        assertThat(testProfile.getImgTitle()).isEqualTo(DEFAULT_IMG_TITLE);
+        assertThat(testProfile.getImgAlt()).isEqualTo(DEFAULT_IMG_ALT);
 
         // Validate the Profile in Elasticsearch
         Profile profileEs = profileSearchRepository.findOne(testProfile.getId());
@@ -320,7 +334,10 @@ public class ProfileResourceIntTest {
             .andExpect(jsonPath("$.[*].locGeo").value(hasItem(DEFAULT_LOC_GEO.toString())))
             .andExpect(jsonPath("$.[*].locCapacity").value(hasItem(DEFAULT_LOC_CAPACITY.toString())))
             .andExpect(jsonPath("$.[*].spAvailableRegion").value(hasItem(DEFAULT_SP_AVAILABLE_REGION.toString())))
-            .andExpect(jsonPath("$.[*].featureStr").value(hasItem(DEFAULT_FEATURE_STR.toString())));
+            .andExpect(jsonPath("$.[*].featureStr").value(hasItem(DEFAULT_FEATURE_STR.toString())))
+            .andExpect(jsonPath("$.[*].imgUrl").value(hasItem(DEFAULT_IMG_URL.toString())))
+            .andExpect(jsonPath("$.[*].imgTitle").value(hasItem(DEFAULT_IMG_TITLE.toString())))
+            .andExpect(jsonPath("$.[*].imgAlt").value(hasItem(DEFAULT_IMG_ALT.toString())));
     }
 
     @Test
@@ -360,7 +377,10 @@ public class ProfileResourceIntTest {
             .andExpect(jsonPath("$.locGeo").value(DEFAULT_LOC_GEO.toString()))
             .andExpect(jsonPath("$.locCapacity").value(DEFAULT_LOC_CAPACITY.toString()))
             .andExpect(jsonPath("$.spAvailableRegion").value(DEFAULT_SP_AVAILABLE_REGION.toString()))
-            .andExpect(jsonPath("$.featureStr").value(DEFAULT_FEATURE_STR.toString()));
+            .andExpect(jsonPath("$.featureStr").value(DEFAULT_FEATURE_STR.toString()))
+            .andExpect(jsonPath("$.imgUrl").value(DEFAULT_IMG_URL.toString()))
+            .andExpect(jsonPath("$.imgTitle").value(DEFAULT_IMG_TITLE.toString()))
+            .andExpect(jsonPath("$.imgAlt").value(DEFAULT_IMG_ALT.toString()));
     }
 
     @Test
@@ -1553,22 +1573,120 @@ public class ProfileResourceIntTest {
 
     @Test
     @Transactional
-    public void getAllProfilesByFeaturesIsEqualToSomething() throws Exception {
+    public void getAllProfilesByImgUrlIsEqualToSomething() throws Exception {
         // Initialize the database
-        Feature features = FeatureResourceIntTest.createEntity(em);
-        em.persist(features);
-        em.flush();
-        profile.addFeatures(features);
         profileRepository.saveAndFlush(profile);
-        Long featuresId = features.getId();
 
-        // Get all the profileList where features equals to featuresId
-        defaultProfileShouldBeFound("featuresId.equals=" + featuresId);
+        // Get all the profileList where imgUrl equals to DEFAULT_IMG_URL
+        defaultProfileShouldBeFound("imgUrl.equals=" + DEFAULT_IMG_URL);
 
-        // Get all the profileList where features equals to featuresId + 1
-        defaultProfileShouldNotBeFound("featuresId.equals=" + (featuresId + 1));
+        // Get all the profileList where imgUrl equals to UPDATED_IMG_URL
+        defaultProfileShouldNotBeFound("imgUrl.equals=" + UPDATED_IMG_URL);
     }
 
+    @Test
+    @Transactional
+    public void getAllProfilesByImgUrlIsInShouldWork() throws Exception {
+        // Initialize the database
+        profileRepository.saveAndFlush(profile);
+
+        // Get all the profileList where imgUrl in DEFAULT_IMG_URL or UPDATED_IMG_URL
+        defaultProfileShouldBeFound("imgUrl.in=" + DEFAULT_IMG_URL + "," + UPDATED_IMG_URL);
+
+        // Get all the profileList where imgUrl equals to UPDATED_IMG_URL
+        defaultProfileShouldNotBeFound("imgUrl.in=" + UPDATED_IMG_URL);
+    }
+
+    @Test
+    @Transactional
+    public void getAllProfilesByImgUrlIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        profileRepository.saveAndFlush(profile);
+
+        // Get all the profileList where imgUrl is not null
+        defaultProfileShouldBeFound("imgUrl.specified=true");
+
+        // Get all the profileList where imgUrl is null
+        defaultProfileShouldNotBeFound("imgUrl.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllProfilesByImgTitleIsEqualToSomething() throws Exception {
+        // Initialize the database
+        profileRepository.saveAndFlush(profile);
+
+        // Get all the profileList where imgTitle equals to DEFAULT_IMG_TITLE
+        defaultProfileShouldBeFound("imgTitle.equals=" + DEFAULT_IMG_TITLE);
+
+        // Get all the profileList where imgTitle equals to UPDATED_IMG_TITLE
+        defaultProfileShouldNotBeFound("imgTitle.equals=" + UPDATED_IMG_TITLE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllProfilesByImgTitleIsInShouldWork() throws Exception {
+        // Initialize the database
+        profileRepository.saveAndFlush(profile);
+
+        // Get all the profileList where imgTitle in DEFAULT_IMG_TITLE or UPDATED_IMG_TITLE
+        defaultProfileShouldBeFound("imgTitle.in=" + DEFAULT_IMG_TITLE + "," + UPDATED_IMG_TITLE);
+
+        // Get all the profileList where imgTitle equals to UPDATED_IMG_TITLE
+        defaultProfileShouldNotBeFound("imgTitle.in=" + UPDATED_IMG_TITLE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllProfilesByImgTitleIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        profileRepository.saveAndFlush(profile);
+
+        // Get all the profileList where imgTitle is not null
+        defaultProfileShouldBeFound("imgTitle.specified=true");
+
+        // Get all the profileList where imgTitle is null
+        defaultProfileShouldNotBeFound("imgTitle.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllProfilesByImgAltIsEqualToSomething() throws Exception {
+        // Initialize the database
+        profileRepository.saveAndFlush(profile);
+
+        // Get all the profileList where imgAlt equals to DEFAULT_IMG_ALT
+        defaultProfileShouldBeFound("imgAlt.equals=" + DEFAULT_IMG_ALT);
+
+        // Get all the profileList where imgAlt equals to UPDATED_IMG_ALT
+        defaultProfileShouldNotBeFound("imgAlt.equals=" + UPDATED_IMG_ALT);
+    }
+
+    @Test
+    @Transactional
+    public void getAllProfilesByImgAltIsInShouldWork() throws Exception {
+        // Initialize the database
+        profileRepository.saveAndFlush(profile);
+
+        // Get all the profileList where imgAlt in DEFAULT_IMG_ALT or UPDATED_IMG_ALT
+        defaultProfileShouldBeFound("imgAlt.in=" + DEFAULT_IMG_ALT + "," + UPDATED_IMG_ALT);
+
+        // Get all the profileList where imgAlt equals to UPDATED_IMG_ALT
+        defaultProfileShouldNotBeFound("imgAlt.in=" + UPDATED_IMG_ALT);
+    }
+
+    @Test
+    @Transactional
+    public void getAllProfilesByImgAltIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        profileRepository.saveAndFlush(profile);
+
+        // Get all the profileList where imgAlt is not null
+        defaultProfileShouldBeFound("imgAlt.specified=true");
+
+        // Get all the profileList where imgAlt is null
+        defaultProfileShouldNotBeFound("imgAlt.specified=false");
+    }
     /**
      * Executes the search, and checks that the default entity is returned
      */
@@ -1603,7 +1721,10 @@ public class ProfileResourceIntTest {
             .andExpect(jsonPath("$.[*].locGeo").value(hasItem(DEFAULT_LOC_GEO.toString())))
             .andExpect(jsonPath("$.[*].locCapacity").value(hasItem(DEFAULT_LOC_CAPACITY.toString())))
             .andExpect(jsonPath("$.[*].spAvailableRegion").value(hasItem(DEFAULT_SP_AVAILABLE_REGION.toString())))
-            .andExpect(jsonPath("$.[*].featureStr").value(hasItem(DEFAULT_FEATURE_STR.toString())));
+            .andExpect(jsonPath("$.[*].featureStr").value(hasItem(DEFAULT_FEATURE_STR.toString())))
+            .andExpect(jsonPath("$.[*].imgUrl").value(hasItem(DEFAULT_IMG_URL.toString())))
+            .andExpect(jsonPath("$.[*].imgTitle").value(hasItem(DEFAULT_IMG_TITLE.toString())))
+            .andExpect(jsonPath("$.[*].imgAlt").value(hasItem(DEFAULT_IMG_ALT.toString())));
     }
 
     /**
@@ -1665,7 +1786,10 @@ public class ProfileResourceIntTest {
             .locGeo(UPDATED_LOC_GEO)
             .locCapacity(UPDATED_LOC_CAPACITY)
             .spAvailableRegion(UPDATED_SP_AVAILABLE_REGION)
-            .featureStr(UPDATED_FEATURE_STR);
+            .featureStr(UPDATED_FEATURE_STR)
+            .imgUrl(UPDATED_IMG_URL)
+            .imgTitle(UPDATED_IMG_TITLE)
+            .imgAlt(UPDATED_IMG_ALT);
 
         restProfileMockMvc.perform(put("/api/profiles")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -1703,6 +1827,9 @@ public class ProfileResourceIntTest {
         assertThat(testProfile.getLocCapacity()).isEqualTo(UPDATED_LOC_CAPACITY);
         assertThat(testProfile.getSpAvailableRegion()).isEqualTo(UPDATED_SP_AVAILABLE_REGION);
         assertThat(testProfile.getFeatureStr()).isEqualTo(UPDATED_FEATURE_STR);
+        assertThat(testProfile.getImgUrl()).isEqualTo(UPDATED_IMG_URL);
+        assertThat(testProfile.getImgTitle()).isEqualTo(UPDATED_IMG_TITLE);
+        assertThat(testProfile.getImgAlt()).isEqualTo(UPDATED_IMG_ALT);
 
         // Validate the Profile in Elasticsearch
         Profile profileEs = profileSearchRepository.findOne(testProfile.getId());
@@ -1788,7 +1915,10 @@ public class ProfileResourceIntTest {
             .andExpect(jsonPath("$.[*].locGeo").value(hasItem(DEFAULT_LOC_GEO.toString())))
             .andExpect(jsonPath("$.[*].locCapacity").value(hasItem(DEFAULT_LOC_CAPACITY.toString())))
             .andExpect(jsonPath("$.[*].spAvailableRegion").value(hasItem(DEFAULT_SP_AVAILABLE_REGION.toString())))
-            .andExpect(jsonPath("$.[*].featureStr").value(hasItem(DEFAULT_FEATURE_STR.toString())));
+            .andExpect(jsonPath("$.[*].featureStr").value(hasItem(DEFAULT_FEATURE_STR.toString())))
+            .andExpect(jsonPath("$.[*].imgUrl").value(hasItem(DEFAULT_IMG_URL.toString())))
+            .andExpect(jsonPath("$.[*].imgTitle").value(hasItem(DEFAULT_IMG_TITLE.toString())))
+            .andExpect(jsonPath("$.[*].imgAlt").value(hasItem(DEFAULT_IMG_ALT.toString())));
     }
 
     @Test

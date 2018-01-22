@@ -112,11 +112,17 @@
         <dd>
             <span>{{profile.featureStr}}</span>
         </dd>
-        <dt><span jhiTranslate="hochzeitclick11App.profile.features">Features</span></dt>
+        <dt><span jhiTranslate="hochzeitclick11App.profile.imgUrl">Img Url</span></dt>
         <dd>
-            <span *ngFor="let features of profile.features; let last = last">
-                <a [routerLink]="['/feature-my-suffix', features?.id ]">{{features.name}}</a>{{last ? '' : ', '}}
-            </span>
+            <span>{{profile.imgUrl}}</span>
+        </dd>
+        <dt><span jhiTranslate="hochzeitclick11App.profile.imgTitle">Img Title</span></dt>
+        <dd>
+            <span>{{profile.imgTitle}}</span>
+        </dd>
+        <dt><span jhiTranslate="hochzeitclick11App.profile.imgAlt">Img Alt</span></dt>
+        <dd>
+            <span>{{profile.imgAlt}}</span>
         </dd>
     </dl>
 

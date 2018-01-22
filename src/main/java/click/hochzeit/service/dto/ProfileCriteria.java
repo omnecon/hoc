@@ -96,7 +96,11 @@ public class ProfileCriteria implements Serializable {
 
     private StringFilter featureStr;
 
-    private LongFilter featuresId;
+    private StringFilter imgUrl;
+
+    private StringFilter imgTitle;
+
+    private StringFilter imgAlt;
 
     public ProfileCriteria() {
     }
@@ -325,12 +329,28 @@ public class ProfileCriteria implements Serializable {
         this.featureStr = featureStr;
     }
 
-    public LongFilter getFeaturesId() {
-        return featuresId;
+    public StringFilter getImgUrl() {
+        return imgUrl;
     }
 
-    public void setFeaturesId(LongFilter featuresId) {
-        this.featuresId = featuresId;
+    public void setImgUrl(StringFilter imgUrl) {
+        this.imgUrl = imgUrl;
+    }
+
+    public StringFilter getImgTitle() {
+        return imgTitle;
+    }
+
+    public void setImgTitle(StringFilter imgTitle) {
+        this.imgTitle = imgTitle;
+    }
+
+    public StringFilter getImgAlt() {
+        return imgAlt;
+    }
+
+    public void setImgAlt(StringFilter imgAlt) {
+        this.imgAlt = imgAlt;
     }
 
     @Override
@@ -364,7 +384,9 @@ public class ProfileCriteria implements Serializable {
                 (locCapacity != null ? "locCapacity=" + locCapacity + ", " : "") +
                 (spAvailableRegion != null ? "spAvailableRegion=" + spAvailableRegion + ", " : "") +
                 (featureStr != null ? "featureStr=" + featureStr + ", " : "") +
-                (featuresId != null ? "featuresId=" + featuresId + ", " : "") +
+                (imgUrl != null ? "imgUrl=" + imgUrl + ", " : "") +
+                (imgTitle != null ? "imgTitle=" + imgTitle + ", " : "") +
+                (imgAlt != null ? "imgAlt=" + imgAlt + ", " : "") +
             "}";
     }
 

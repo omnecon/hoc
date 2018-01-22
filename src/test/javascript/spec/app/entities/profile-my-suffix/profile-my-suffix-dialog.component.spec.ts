@@ -8,7 +8,6 @@ import { Hochzeitclick11TestModule } from '../../../test.module';
 import { ProfileMySuffixDialogComponent } from '../../../../../../main/webapp/app/entities/profile-my-suffix/profile-my-suffix-dialog.component';
 import { ProfileMySuffixService } from '../../../../../../main/webapp/app/entities/profile-my-suffix/profile-my-suffix.service';
 import { ProfileMySuffix } from '../../../../../../main/webapp/app/entities/profile-my-suffix/profile-my-suffix.model';
-import { FeatureMySuffixService } from '../../../../../../main/webapp/app/entities/feature-my-suffix';
 
 describe('Component Tests', () => {
 
@@ -24,7 +23,6 @@ describe('Component Tests', () => {
                 imports: [Hochzeitclick11TestModule],
                 declarations: [ProfileMySuffixDialogComponent],
                 providers: [
-                    FeatureMySuffixService,
                     ProfileMySuffixService
                 ]
             })

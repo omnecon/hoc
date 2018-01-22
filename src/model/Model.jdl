@@ -26,6 +26,9 @@ entity Profile {
 	locCapacity String
 	spAvailableRegion String
 	featureStr String maxlength(512)
+	imgUrl String
+	imgTitle String
+	imgAlt String
 }
 
 entity Statistic {

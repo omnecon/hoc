@@ -160,8 +160,14 @@ public class ProfileQueryService extends QueryService<Profile> {
             if (criteria.getFeatureStr() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getFeatureStr(), Profile_.featureStr));
             }
-            if (criteria.getFeaturesId() != null) {
-                specification = specification.and(buildReferringEntitySpecification(criteria.getFeaturesId(), Profile_.features, Feature_.id));
+            if (criteria.getImgUrl() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getImgUrl(), Profile_.imgUrl));
+            }
+            if (criteria.getImgTitle() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getImgTitle(), Profile_.imgTitle));
+            }
+            if (criteria.getImgAlt() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getImgAlt(), Profile_.imgAlt));
             }
         }
         return specification;

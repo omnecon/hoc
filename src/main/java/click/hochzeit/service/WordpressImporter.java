@@ -5,25 +5,20 @@ import java.sql.SQLException;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import click.hochzeit.domain.Feature;
 import click.hochzeit.domain.Profile;
 import click.hochzeit.domain.Statistic;
 import click.hochzeit.domain.enumeration.Gender;
 import click.hochzeit.domain.enumeration.ProPackage;
-import click.hochzeit.repository.FeatureRepository;
-import click.hochzeit.repository.ProfileRepository;
 import click.hochzeit.repository.StatisticRepository;
 
 @Service
@@ -37,17 +32,16 @@ public class WordpressImporter {
 	private final StatisticRepository statisticRepository;
 	
 	private JdbcTemplate wordpressJdbcTemplate;
-	
-	private final FeatureRepository featureRepository;
+
 
 	
 	public WordpressImporter(ProfileService profileService,
-			@Qualifier("wordpressJdbcTemplate") JdbcTemplate wordpressJdbcTemplate, StatisticRepository statisticRepository, FeatureRepository featureRepository) {
+			@Qualifier("wordpressJdbcTemplate") JdbcTemplate wordpressJdbcTemplate, StatisticRepository statisticRepository) {
 				
 		this.wordpressJdbcTemplate = wordpressJdbcTemplate;
 		this.profileService = profileService;
 		this.statisticRepository = statisticRepository;
-		this.featureRepository = featureRepository;
+
 
 	}
 	
@@ -58,8 +52,7 @@ public class WordpressImporter {
 				
 		if(ProPackage.FREE.equals(proPackage)) {
 			return featureList;
-		}
-		
+		}		
 		
 		featureList.add("pro_slider");
 		featureList.add("no_banners_header");
@@ -96,14 +89,14 @@ public class WordpressImporter {
 		
 	}
 	
-	public void storeFeatures() {
-		
-		List<Feature> features = getFeatures(ProPackage.VIP).stream().map((featureName) -> new Feature(featureName)).collect(Collectors.toList());
-		for (Feature feature : features) {
-			System.out.println(feature);
-		}
-		featureRepository.save(features);
-	}
+//	public void storeFeatures() {
+//		
+//		List<Feature> features = getFeatures(ProPackage.VIP).stream().map((featureName) -> new Feature(featureName)).collect(Collectors.toList());
+//		for (Feature feature : features) {
+//			System.out.println(feature);
+//		}
+//		featureRepository.save(features);
+//	}
 	
 //	public static void main(String[] args) {
 //		new WordpressImporter(null, null, null, null).storeFeatures();
@@ -210,8 +203,11 @@ public class WordpressImporter {
 				
 				//profile.setFeatures(features);
 				
-				profile = profileService.save(profile);
 				
+				String imgUrl = getImageFromWp(profile.getId());
+				profile.setImgUrl(imgUrl);
+				profile = profileService.save(profile);
+
 //				boolean profileExists = profileRepository.exists(profile.getId());
 //
 //				if (profileExists) {
@@ -261,18 +257,38 @@ public class WordpressImporter {
 		return "success (" + rowsImported + ")";
 	}
 
-	private Set<Feature> getFeaturesFromDB(ProPackage proPackage) {
-		List<String> featureStr = this.getFeatures(proPackage);
-		List<Feature> allFeatures = featureRepository.findAll();
+	private String getImageFromWp(Long profileId) {
 		
-		Set<Feature> featuresOfPackage = new HashSet<>();
-		for (Feature feature : allFeatures) {
-			if (featureStr.contains(feature.getName())) {
-				featuresOfPackage.add(feature);
-			}
+		String sql = "SELECT p.guid FROM wp_postmeta pm, wp_posts p WHERE p.post_parent = ? AND pm.meta_key = '_thumbnail_id' AND p.ID = pm.meta_value";		
+
+		try{
+		return wordpressJdbcTemplate.queryForObject(sql, new Long[] { profileId }, String.class);
+		} 
+		catch (EmptyResultDataAccessException e) {
+		if(log.isDebugEnabled()){
+			log.debug(e.toString());
 		}
-	return featuresOfPackage;
-}
+	}
+		return null;
+		
+		// return wordpressJdbcTemplate.queryForObject(sql, new Long[] { profileId }, (rs, rowNum) -> {
+		// 	log.debug("Image loaded :" + rs.getString("guid"));
+		// 	return rs.getString("guid");
+		// });		
+	}
+
+//	private Set<Feature> getFeaturesFromDB(ProPackage proPackage) {
+//		List<String> featureStr = this.getFeatures(proPackage);
+//		List<Feature> allFeatures = featureRepository.findAll();
+//		
+//		Set<Feature> featuresOfPackage = new HashSet<>();
+//		for (Feature feature : allFeatures) {
+//			if (featureStr.contains(feature.getName())) {
+//				featuresOfPackage.add(feature);
+//			}
+//		}
+//	return featuresOfPackage;
+//}
 
 	private ZonedDateTime getZonedDateTime(ResultSet rs, String column) throws SQLException {
 		if (rs.getTimestamp(column) == null) {

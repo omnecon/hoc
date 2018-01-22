@@ -4,12 +4,11 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 
 import org.springframework.data.elasticsearch.annotations.Document;
 import java.io.Serializable;
 import java.time.ZonedDateTime;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.Objects;
 
 import click.hochzeit.domain.enumeration.ProPackage;
@@ -28,7 +27,7 @@ public class Profile implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "created_date")
@@ -111,15 +110,18 @@ public class Profile implements Serializable {
     @Column(name = "sp_available_region")
     private String spAvailableRegion;
 
-    @Column(name = "feature_str")
+    @Size(max = 512)
+    @Column(name = "feature_str", length = 512)
     private String featureStr;
 
-    @ManyToMany
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    @JoinTable(name = "profile_features",
-               joinColumns = @JoinColumn(name="profiles_id", referencedColumnName="id"),
-               inverseJoinColumns = @JoinColumn(name="features_id", referencedColumnName="id"))
-    private Set<Feature> features = new HashSet<>();
+    @Column(name = "img_url")
+    private String imgUrl;
+
+    @Column(name = "img_title")
+    private String imgTitle;
+
+    @Column(name = "img_alt")
+    private String imgAlt;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -481,29 +483,43 @@ public class Profile implements Serializable {
         this.featureStr = featureStr;
     }
 
-    public Set<Feature> getFeatures() {
-        return features;
+    public String getImgUrl() {
+        return imgUrl;
     }
 
-    public Profile features(Set<Feature> features) {
-        this.features = features;
+    public Profile imgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
         return this;
     }
 
-    public Profile addFeatures(Feature feature) {
-        this.features.add(feature);
-        feature.getProfiles().add(this);
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
+    }
+
+    public String getImgTitle() {
+        return imgTitle;
+    }
+
+    public Profile imgTitle(String imgTitle) {
+        this.imgTitle = imgTitle;
         return this;
     }
 
-    public Profile removeFeatures(Feature feature) {
-        this.features.remove(feature);
-        feature.getProfiles().remove(this);
+    public void setImgTitle(String imgTitle) {
+        this.imgTitle = imgTitle;
+    }
+
+    public String getImgAlt() {
+        return imgAlt;
+    }
+
+    public Profile imgAlt(String imgAlt) {
+        this.imgAlt = imgAlt;
         return this;
     }
 
-    public void setFeatures(Set<Feature> features) {
-        this.features = features;
+    public void setImgAlt(String imgAlt) {
+        this.imgAlt = imgAlt;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
@@ -558,6 +574,9 @@ public class Profile implements Serializable {
             ", locCapacity='" + getLocCapacity() + "'" +
             ", spAvailableRegion='" + getSpAvailableRegion() + "'" +
             ", featureStr='" + getFeatureStr() + "'" +
+            ", imgUrl='" + getImgUrl() + "'" +
+            ", imgTitle='" + getImgTitle() + "'" +
+            ", imgAlt='" + getImgAlt() + "'" +
             "}";
     }
 }

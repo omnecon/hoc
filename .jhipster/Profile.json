@@ -1,15 +1,6 @@
 {
     "fluentMethods": true,
-    "relationships": [
-        {
-            "relationshipType": "many-to-many",
-            "otherEntityRelationshipName": "profiles",
-            "relationshipName": "features",
-            "otherEntityName": "feature",
-            "otherEntityField": "name",
-            "ownerSide": true
-        }
-    ],
+    "relationships": [],
     "fields": [
         {
             "fieldName": "createdDate",
@@ -119,6 +110,22 @@
         },
         {
             "fieldName": "featureStr",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 512
+        },
+        {
+            "fieldName": "imgUrl",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "imgTitle",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "imgAlt",
             "fieldType": "String"
         }
     ],

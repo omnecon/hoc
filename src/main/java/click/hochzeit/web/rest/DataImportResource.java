@@ -121,7 +121,7 @@ public class DataImportResource {
         log.debug("REST request to get DataImport : {}", id);
         
         if (id == (long)1111) {
-        	wordpressImporter.storeFeatures();
+
         } else if (id == 2222) {
         	wordpressImporter.importWordpressDB(15);
         }

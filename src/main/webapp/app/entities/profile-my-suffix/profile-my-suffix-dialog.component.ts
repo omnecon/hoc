@@ -4,13 +4,11 @@ import { Response } from '@angular/http';
 
 import { Observable } from 'rxjs/Rx';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { JhiEventManager, JhiAlertService } from 'ng-jhipster';
+import { JhiEventManager } from 'ng-jhipster';
 
 import { ProfileMySuffix } from './profile-my-suffix.model';
 import { ProfileMySuffixPopupService } from './profile-my-suffix-popup.service';
 import { ProfileMySuffixService } from './profile-my-suffix.service';
-import { FeatureMySuffix, FeatureMySuffixService } from '../feature-my-suffix';
-import { ResponseWrapper } from '../../shared';
 
 @Component({
     selector: 'jhi-profile-my-suffix-dialog',
@@ -21,21 +19,15 @@ export class ProfileMySuffixDialogComponent implements OnInit {
     profile: ProfileMySuffix;
     isSaving: boolean;
 
-    features: FeatureMySuffix[];
-
     constructor(
         public activeModal: NgbActiveModal,
-        private jhiAlertService: JhiAlertService,
         private profileService: ProfileMySuffixService,
-        private featureService: FeatureMySuffixService,
         private eventManager: JhiEventManager
     ) {
     }
 
     ngOnInit() {
         this.isSaving = false;
-        this.featureService.query()
-            .subscribe((res: ResponseWrapper) => { this.features = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
     }
 
     clear() {
@@ -66,25 +58,6 @@ export class ProfileMySuffixDialogComponent implements OnInit {
 
     private onSaveError() {
         this.isSaving = false;
-    }
-
-    private onError(error: any) {
-        this.jhiAlertService.error(error.message, null, null);
-    }
-
-    trackFeatureById(index: number, item: FeatureMySuffix) {
-        return item.id;
-    }
-
-    getSelected(selectedVals: Array<any>, option: any) {
-        if (selectedVals) {
-            for (let i = 0; i < selectedVals.length; i++) {
-                if (option.id === selectedVals[i].id) {
-                    return selectedVals[i];
-                }
-            }
-        }
-        return option;
     }
 }
 

@@ -42,7 +42,9 @@ export class ProfileMySuffix implements BaseEntity {
         public locCapacity?: string,
         public spAvailableRegion?: string,
         public featureStr?: string,
-        public features?: BaseEntity[],
+        public imgUrl?: string,
+        public imgTitle?: string,
+        public imgAlt?: string,
     ) {
         this.published = false;
         this.agbCheck = false;

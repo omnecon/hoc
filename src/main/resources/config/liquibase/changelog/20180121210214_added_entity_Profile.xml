@@ -126,7 +126,19 @@
                 <constraints nullable="true" />
             </column>
 
-            <column name="feature_str" type="varchar(255)">
+            <column name="feature_str" type="varchar(512)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="img_url" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="img_title" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="img_alt" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
 
@@ -134,17 +146,6 @@
         </createTable>
         <dropDefaultValue tableName="profile" columnName="created_date" columnDataType="datetime"/>
         <dropDefaultValue tableName="profile" columnName="last_updated_date" columnDataType="datetime"/>
-        
-        <createTable tableName="profile_features">
-            <column name="features_id" type="bigint">
-                <constraints nullable="false"/>
-            </column>
-            <column name="profiles_id" type="bigint">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
-
-        <addPrimaryKey columnNames="profiles_id, features_id" tableName="profile_features"/>
         
     </changeSet>
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->

@@ -45,8 +45,6 @@ public class CacheConfiguration {
             cm.createCache(click.hochzeit.domain.Profile.class.getName(), jcacheConfiguration);
             cm.createCache(click.hochzeit.domain.Profile.class.getName() + ".features", jcacheConfiguration);
             cm.createCache(click.hochzeit.domain.Statistic.class.getName(), jcacheConfiguration);
-            cm.createCache(click.hochzeit.domain.Feature.class.getName(), jcacheConfiguration);
-            cm.createCache(click.hochzeit.domain.Feature.class.getName() + ".profiles", jcacheConfiguration);
             cm.createCache(click.hochzeit.domain.Image.class.getName(), jcacheConfiguration);
             cm.createCache(click.hochzeit.domain.Gallery.class.getName(), jcacheConfiguration);
             cm.createCache(click.hochzeit.domain.Inquiry.class.getName(), jcacheConfiguration);

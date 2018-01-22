@@ -43,7 +43,9 @@
             "locCapacity": "Loc Capacity",
             "spAvailableRegion": "Sp Available Region",
             "featureStr": "Feature Str",
-            "features": "Features"
+            "imgUrl": "Img Url",
+            "imgTitle": "Img Title",
+            "imgAlt": "Img Alt"
         }
     }
 }

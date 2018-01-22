@@ -18,6 +18,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -56,7 +57,7 @@ public class ProfileResource {
      */
     @PostMapping("/profiles")
     @Timed
-    public ResponseEntity<Profile> createProfile(@RequestBody Profile profile) throws URISyntaxException {
+    public ResponseEntity<Profile> createProfile(@Valid @RequestBody Profile profile) throws URISyntaxException {
         log.debug("REST request to save Profile : {}", profile);
         if (profile.getId() != null) {
             throw new BadRequestAlertException("A new profile cannot already have an ID", ENTITY_NAME, "idexists");
@@ -78,7 +79,7 @@ public class ProfileResource {
      */
     @PutMapping("/profiles")
     @Timed
-    public ResponseEntity<Profile> updateProfile(@RequestBody Profile profile) throws URISyntaxException {
+    public ResponseEntity<Profile> updateProfile(@Valid @RequestBody Profile profile) throws URISyntaxException {
         log.debug("REST request to update Profile : {}", profile);
         if (profile.getId() == null) {
             return createProfile(profile);
